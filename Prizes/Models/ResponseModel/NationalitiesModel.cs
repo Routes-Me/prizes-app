@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PrizesService.Models.ResponseModel
+namespace Prizes.Models.ResponseModel
 {
     public class NationalitiesModel
     {

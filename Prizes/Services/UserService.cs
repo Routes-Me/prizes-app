@@ -1,11 +1,11 @@
-﻿using PrizesService.Abstraction;
-using PrizesService.Models.ResponseModel;
+﻿using Prizes.Abstraction;
+using Prizes.Models.ResponseModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PrizesService.Services
+namespace Prizes.Services
 {
     public class UserService
     {

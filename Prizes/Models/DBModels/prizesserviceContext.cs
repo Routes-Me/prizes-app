@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace PrizesService.Models.DBModels
+namespace Prizes.Models.DBModels
 {
     public partial class prizesserviceContext : DbContext
     {

@@ -11,12 +11,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
-using PrizesService.Abstraction;
-using PrizesService.Models.DBModels;
-using PrizesService.Repository;
-using PrizesService.Services;
+using Prizes.Abstraction;
+using Prizes.Models.DBModels;
+using Prizes.Repository;
+using Prizes.Services;
 
-namespace PrizesService
+namespace Prizes
 {
     public class Startup
     {

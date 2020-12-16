@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PrizesService.Models.DBModels
+namespace Prizes.Models.DBModels
 {
     public partial class Nationalities
     {

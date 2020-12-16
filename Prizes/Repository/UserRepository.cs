@@ -1,12 +1,12 @@
-﻿using PrizesService.Abstraction;
-using PrizesService.Models.DBModels;
-using PrizesService.Models.ResponseModel;
+﻿using Prizes.Abstraction;
+using Prizes.Models.DBModels;
+using Prizes.Models.ResponseModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PrizesService.Repository
+namespace Prizes.Repository
 {
     public class UserRepository : IUserRepository
     {

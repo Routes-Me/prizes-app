@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
-using PrizesService.Models;
-using PrizesService.Models.ResponseModel;
-using PrizesService.Services;
+using Prizes.Models;
+using Prizes.Models.ResponseModel;
+using Prizes.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PrizesService.Pages
+namespace Prizes.Pages
 {
 
     public partial class Index : ComponentBase
