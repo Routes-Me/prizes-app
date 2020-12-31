@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Prizes.Abstraction;
-using Prizes.Models.DBModels;
+using Prizes.Models.Common;
 using Prizes.Repository;
 using Prizes.Services;
 
@@ -46,14 +46,13 @@ namespace Prizes
                        .AllowAnyHeader();
             }));
 
-            services.AddDbContext<prizesserviceContext>(options =>
-            {
-                options.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
-            });
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+            services.Configure<Dependencies>(Configuration.GetSection("Dependencies"));
+
             services.AddScoped<NationalitiesService>();
-            services.AddScoped<UserService>();
+            services.AddScoped<CandidateService>();
             services.AddTransient<INationalitiesRepository, NationalitiesRepository>();
-            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<ICandidatesRepository, CandidatesRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

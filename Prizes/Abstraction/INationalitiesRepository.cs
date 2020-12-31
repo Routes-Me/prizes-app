@@ -1,4 +1,4 @@
-﻿using Prizes.Models.ResponseModel;
+﻿using Prizes.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +8,6 @@ namespace Prizes.Abstraction
 {
    public interface INationalitiesRepository
     {
-        List<NationalitiesModel> GetAllNationalities();
+        List<Nationalities> GetAllNationalities();
     }
 }

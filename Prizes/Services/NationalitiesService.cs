@@ -1,5 +1,5 @@
 ﻿using Prizes.Abstraction;
-using Prizes.Models.ResponseModel;
+using Prizes.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +16,7 @@ namespace Prizes.Services
             _nationalitiesRepository = nationalitiesRepository;
         }
 
-        public Task<List<NationalitiesModel>> GetNationalitiesList()
+        public Task<List<Nationalities>> GetNationalitiesList()
         {
             return Task.FromResult(_nationalitiesRepository.GetAllNationalities());
         }

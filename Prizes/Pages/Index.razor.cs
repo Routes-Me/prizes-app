@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Prizes.Models;
-using Prizes.Models.ResponseModel;
 using Prizes.Services;
 using System;
 using System.Collections.Generic;
@@ -12,54 +11,74 @@ namespace Prizes.Pages
 
     public partial class Index : ComponentBase
     {
+        [Parameter]
+        public string DrawsId { get; set; }
 
-        UsersModel model = new UsersModel();
-        List<NationalitiesModel> nationalitiesModel = new List<NationalitiesModel>();
+        Candidates candidatesModel = new Candidates();
+        List<Nationalities> nationalitiesList = new List<Nationalities>();
         [Inject]
         protected NationalitiesService nationalitiesService { get; set; }
         [Inject]
-        protected UserService userService { get; set; }
+        protected CandidateService userService { get; set; }
 
-        string spinner = "d-none";
+        string spinner = "d-none", maxDate = string.Empty, minDate = string.Empty;
         string message = string.Empty;
         AlertMessageType messageType = AlertMessageType.Success;
         protected override async Task OnInitializedAsync()
         {
             await GetNationalities();
+            maxDate = DateTime.Now.ToString("yyyy-MM-dd");
+            minDate = DateTime.Now.AddYears(-100).ToString("yyyy-MM-dd");
         }
 
         protected async Task GetNationalities()
         {
             var nationalities = await nationalitiesService.GetNationalitiesList();
-            nationalitiesModel = nationalities;
+            nationalitiesList = nationalities;
         }
 
-        public async Task RegisterUser()
+        public async Task SaveCandidates()
         {
-            navigationManager.NavigateTo("/success");
-            //try
-            //{
-            //    spinner = string.Empty;
-            //    UsersModel usersModel = new UsersModel();
-            //    usersModel.Name = model.Name;
-            //    usersModel.Email = model.Email;
-            //    usersModel.PhoneNumber = model.PhoneNumber;
-            //    usersModel.DateOfBirth = model.DateOfBirth;
-            //    usersModel.NationalityId = model.NationalityId;
-            //    await InsertUsers(usersModel);
-            //}
-            //catch (Exception)
-            //{
-            //    message = "Something went wrong!! Please try again.";
-            //    messageType = AlertMessageType.Error;
-            //}
-            //spinner = "d-none";
-            //await Task.Delay(1);
+            try
+            {
+                spinner = string.Empty;
+                if (string.IsNullOrEmpty(DrawsId))
+                {
+                    message = "DrawsId required!!";
+                    messageType = AlertMessageType.Error;
+                }
+
+                Candidates candidates = new Candidates();
+                candidates.Name = candidatesModel.Name;
+                candidates.Email = candidatesModel.Email;
+                candidates.PhoneNumber = candidatesModel.PhoneNumber;
+                candidates.DateOfBirth = candidatesModel.DateOfBirth;
+                candidates.NationalityId = candidatesModel.NationalityId;
+
+                bool isSuccess = InsertCandidates(candidates, DrawsId);
+                if (isSuccess == true)
+                {
+                    navigationManager.NavigateTo("/success");
+                }
+                else
+                {
+                    message = "Something went wrong!! Please try again.";
+                    messageType = AlertMessageType.Error;
+                }
+            }
+            catch (Exception)
+            {
+                message = "Something went wrong!! Please try again.";
+                messageType = AlertMessageType.Error;
+            }
+            spinner = "d-none";
+            await Task.Delay(1);
         }
 
-        protected async Task InsertUsers(UsersModel usersModel)
+        protected bool InsertCandidates(Candidates candidates, string drawsId)
         {
-            await userService.AddUsers(usersModel);
+
+            return  userService.AddCandidates(candidates, drawsId);
         }
     }
 }

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Prizes.Models.ResponseModel
+namespace Prizes.Models
 {
-    public class NationalitiesModel
+    public class Nationalities
     {
-        public int NationalityId { get; set; }
+        public string NationalityId { get; set; }
         public string Name { get; set; }
     }
 }
