@@ -1,0 +1,40 @@
+﻿@page "/"
+@namespace Prizes.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Routes Prizes</title>
+    <base href="~/" />
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/app.min.css" rel="stylesheet" />
+    <link href="css/style.css" type="text/css" rel="stylesheet" />
+    <link href="fonts/fontawsome/css/all.min.css" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
+</head>
+<body>
+    <app>
+        <component type="typeof(App)" render-mode="ServerPrerendered" />
+    </app>
+
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
+            An error has occurred. This application may no longer respond until reloaded.
+        </environment>
+        <environment include="Development">
+            An unhandled exception has occurred. See browser dev tools for details.
+        </environment>
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_framework/blazor.server.js"></script>
+    <script src="js/jquery.min.js"></script>
+    
+</body>
+</html>
