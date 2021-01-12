@@ -5,7 +5,7 @@
     var bdate = $('.cbdate').val();
 
 
-    if (name != '' && email != '' && number != '' && bdate != '') {
+    if (name != '' && email != '' && number != '') {
         $('.candidate-submit').removeClass('disabled');
     }
     else {

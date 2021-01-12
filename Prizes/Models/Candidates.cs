@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -17,19 +18,20 @@ namespace Prizes.Models
         public string NationalityId { get; set; }
     }
 
+    [BindProperties]
     public class CandidatesModel
     {
-        [Required]
+        [Required(ErrorMessage = "Name required")]
         public string Name { get; set; }
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Email required")]
+        [EmailAddress(ErrorMessage ="Valid email address required")]
         public string Email { get; set; }
-        [Required]
+        [Required(ErrorMessage = "DateOfBirth required")]
         public string DateOfBirth { get; set; }
-        [Required]
-        [Phone]
+        [Required(ErrorMessage = "PhoneNumber required")]
+        [Phone(ErrorMessage = "Valid phone number required")]
         public string PhoneNumber { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Nationality required")]
         public string NationalityId { get; set; }
     }
 }

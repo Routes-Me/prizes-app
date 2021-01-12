@@ -27,6 +27,7 @@
             <div>
                 <div class="form-group form-filds">
                     <input type="text" @bind="candidatesModel.Name" class="form-control cname" placeholder="@Localizer["Name"]">
+                    <span asp-validation-for="Name"></span>
                 </div>
                 <div class="form-group form-filds">
                     <input type="text" @bind="candidatesModel.Email" class="form-control cemail" placeholder="@Localizer["Email"]">
@@ -35,7 +36,7 @@
                     <input type="text" @bind="candidatesModel.PhoneNumber" class="form-control cnumber" placeholder="@Localizer["Number"]">
                 </div>
                 <div class="form-group form-filds">
-                    <input placeholder="Date of Birth" class="form-control textbox-n cbdate" type="text" id="date" @bind="candidatesModel.DateOfBirth" onfocus="(this.type='date')" onblur="(this.type='text')" max="@maxDate" min="@minDate">
+                    <input placeholder="@Localizer["DateOfBirth"]" class="form-control textbox-n cbdate" type="text" id="date" @bind="candidatesModel.DateOfBirth" onfocus="(this.type='date')" onblur="(this.type='text')" max="@maxDate" min="@minDate">
                 </div>
                 <div class="form-group form-filds">
                     <select class="form-control cnationalities" @bind="candidatesModel.NationalityId">
