@@ -1,11 +1,23 @@
 ﻿@page "/{DrawsId}"
 @layout MainLayout
 @inject NavigationManager navigationManager
+@inject IStringLocalizer<App> Localizer
 
+<style>
+    .login-area .topbar {
+        margin-bottom: 25px !important;
+    }
+</style>
 <div class="login-area">
+    <div class="topbar">
+        <a href="javascript:void(0);">
+            <img src="images/routes-logo.svg" width="40" height="40" alt="" />
+        </a>
+        <ChooseLanguage />
+    </div>
     <div class="title">
-        <h2>Enter Our Prize Draws to Win!</h2>
-        <p>Sign up now to enter for a chance to win prizes from leading brands and retailers</p>
+        <h2>@Localizer["Heading1"]</h2>
+        <p>@Localizer["Heading2"]</p>
     </div>
     <AlertMessage Message="@message" MessageType="@messageType" />
     <div class="form-holder ">
@@ -14,20 +26,21 @@
             <ValidationSummary />
             <div>
                 <div class="form-group form-filds">
-                    <input type="text" @bind="candidatesModel.Name" class="form-control" placeholder="Name">
+                    <input type="text" @bind="candidatesModel.Name" class="form-control cname" placeholder="@Localizer["Name"]">
+                    <span asp-validation-for="Name"></span>
                 </div>
                 <div class="form-group form-filds">
-                    <input type="text" @bind="candidatesModel.Email" class="form-control" placeholder="Email">
+                    <input type="text" @bind="candidatesModel.Email" class="form-control cemail" placeholder="@Localizer["Email"]">
                 </div>
                 <div class="form-group form-filds">
-                    <input type="text" @bind="candidatesModel.PhoneNumber" class="form-control" placeholder="Phone Number">
+                    <input type="text" @bind="candidatesModel.PhoneNumber" class="form-control cnumber" placeholder="@Localizer["Number"]">
                 </div>
                 <div class="form-group form-filds">
-                    <input placeholder="Date of Birth" class="form-control textbox-n" type="date" id="date"  @bind="candidatesModel.DateOfBirth" max="@maxDate" min="@minDate">
+                    <input placeholder="@Localizer["DateOfBirth"]" class="form-control textbox-n cbdate" type="text" id="date" @bind="candidatesModel.DateOfBirth" onfocus="(this.type='date')" onblur="(this.type='text')" max="@maxDate" min="@minDate">
                 </div>
                 <div class="form-group form-filds">
-                    <select class="form-control" @bind="candidatesModel.NationalityId">
-                        <option value="0">Select Nationality</option>
+                    <select class="form-control cnationalities" @bind="candidatesModel.NationalityId">
+                        <option value="0">@Localizer["SelectNationality"]</option>
                         @foreach (var item in nationalitiesList)
                         {
                             <option value="@item.NationalityId">@item.Name</option>
@@ -37,7 +50,7 @@
 
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-white btn-lg">Submit</button>
+                <button type="submit" class="btn btn-white btn-lg disabled candidate-submit">@Localizer["Submit"]</button>
             </div>
 
             <div class="footer-section">

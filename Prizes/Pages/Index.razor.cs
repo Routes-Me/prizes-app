@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 namespace Prizes.Pages
 {
 
-    public partial class Index : ComponentBase
+    public partial class Index 
     {
         [Parameter]
         public string DrawsId { get; set; }
 
-        Candidates candidatesModel = new Candidates();
+        CandidatesModel candidatesModel = new CandidatesModel();
         List<Nationalities> nationalitiesList = new List<Nationalities>();
         [Inject]
         protected NationalitiesService nationalitiesService { get; set; }
@@ -52,7 +52,7 @@ namespace Prizes.Pages
                 candidates.Name = candidatesModel.Name;
                 candidates.Email = candidatesModel.Email;
                 candidates.PhoneNumber = candidatesModel.PhoneNumber;
-                candidates.DateOfBirth = candidatesModel.DateOfBirth;
+                candidates.DateOfBirth = Convert.ToDateTime(candidatesModel.DateOfBirth);
                 candidates.NationalityId = candidatesModel.NationalityId;
 
                 bool isSuccess = InsertCandidates(candidates, DrawsId);
@@ -78,7 +78,7 @@ namespace Prizes.Pages
         protected bool InsertCandidates(Candidates candidates, string drawsId)
         {
 
-            return  userService.AddCandidates(candidates, drawsId);
+            return userService.AddCandidates(candidates, drawsId);
         }
     }
 }
