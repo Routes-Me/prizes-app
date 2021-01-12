@@ -26,20 +26,20 @@
             <ValidationSummary />
             <div>
                 <div class="form-group form-filds">
-                    <input type="text" @bind="candidatesModel.Name" class="form-control" placeholder="@Localizer["Name"]">
+                    <input type="text" @bind="candidatesModel.Name" class="form-control cname" placeholder="@Localizer["Name"]">
                 </div>
                 <div class="form-group form-filds">
-                    <input type="text" @bind="candidatesModel.Email" class="form-control" placeholder="@Localizer["Email"]">
+                    <input type="text" @bind="candidatesModel.Email" class="form-control cemail" placeholder="@Localizer["Email"]">
                 </div>
                 <div class="form-group form-filds">
-                    <input type="text" @bind="candidatesModel.PhoneNumber" class="form-control" placeholder="@Localizer["Number"]">
+                    <input type="text" @bind="candidatesModel.PhoneNumber" class="form-control cnumber" placeholder="@Localizer["Number"]">
                 </div>
                 <div class="form-group form-filds">
-                    <input placeholder="Date of Birth" class="form-control textbox-n" type="date" id="date" @bind="candidatesModel.DateOfBirth" max="@maxDate" min="@minDate">
+                    <input placeholder="Date of Birth" class="form-control textbox-n cbdate" type="text" id="date" @bind="candidatesModel.DateOfBirth" onfocus="(this.type='date')" onblur="(this.type='text')" max="@maxDate" min="@minDate">
                 </div>
                 <div class="form-group form-filds">
-                    <select class="form-control" @bind="candidatesModel.NationalityId">
-                        <option value="0">>@Localizer["SelectNationality"]</option>
+                    <select class="form-control cnationalities" @bind="candidatesModel.NationalityId">
+                        <option value="0">@Localizer["SelectNationality"]</option>
                         @foreach (var item in nationalitiesList)
                         {
                             <option value="@item.NationalityId">@item.Name</option>
@@ -49,7 +49,7 @@
 
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-white btn-lg">@Localizer["Submit"]</button>
+                <button type="submit" class="btn btn-white btn-lg disabled candidate-submit">@Localizer["Submit"]</button>
             </div>
 
             <div class="footer-section">
