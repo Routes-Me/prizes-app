@@ -2,13 +2,30 @@
 @layout MainLayout
 @inject NavigationManager navigationManager
 @inject IStringLocalizer<App> Localizer
+@inject IJSRuntime JSRuntime;
 
 <style>
     .login-area .topbar {
         margin-bottom: 25px !important;
     }
+
+    .ar-direction {
+        direction: rtl;
+    }
+
+        .ar-direction .language-options {
+            float: left;
+        }
+
+    .heading1 {
+        font-size: 40px;
+    }
+
+    .hd-direction {
+        text-align: right !important;
+    }
 </style>
-<div class="login-area">
+<div class="login-area ">
     <div class="topbar">
         <a href="javascript:void(0);">
             <img src="images/routes-logo.svg" width="40" height="40" alt="" />
@@ -16,7 +33,7 @@
         <ChooseLanguage />
     </div>
     <div class="title">
-        <h2>@Localizer["Heading1"]</h2>
+        <p class="heading1">@Localizer["Heading1"]</p>
         <p>@Localizer["Heading2"]</p>
     </div>
     <AlertMessage Message="@message" MessageType="@messageType" />

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using Prizes.Models;
 using Prizes.Services;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 namespace Prizes.Pages
 {
 
-    public partial class Index 
+    public partial class Index
     {
         [Parameter]
         public string DrawsId { get; set; }
@@ -21,6 +22,8 @@ namespace Prizes.Pages
         [Inject]
         protected CandidateService userService { get; set; }
 
+        private string selectedCulture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+
         string spinner = "d-none", maxDate = string.Empty, minDate = string.Empty;
         string message = string.Empty;
         AlertMessageType messageType = AlertMessageType.Success;
@@ -29,6 +32,18 @@ namespace Prizes.Pages
             await GetNationalities();
             maxDate = DateTime.Now.ToString("yyyy-MM-dd");
             minDate = DateTime.Now.AddYears(-100).ToString("yyyy-MM-dd");
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (selectedCulture == "ar-KW")
+            {
+                await JSRuntime.InvokeVoidAsync("setRTLAlignment");
+            }
+            else
+            {
+                await JSRuntime.InvokeVoidAsync("setLTRAlignment");
+            }
         }
 
         protected async Task GetNationalities()

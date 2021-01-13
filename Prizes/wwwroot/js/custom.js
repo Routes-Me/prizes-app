@@ -12,3 +12,13 @@
         $('.candidate-submit').addClass('disabled');
     }
 });
+
+function setRTLAlignment() {
+    $('.login-area').addClass('ar-direction');
+    $('.login-area .title p').addClass('hd-direction');
+}
+
+function setLTRAlignment() {
+    $('.login-area').removeClass('ar-direction');
+    $('.login-area .title p').removeClass('hd-direction');
+}
