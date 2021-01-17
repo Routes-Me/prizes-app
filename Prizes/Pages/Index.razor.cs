@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using Prizes.Models;
 using Prizes.Services;
 using System;
@@ -9,17 +10,19 @@ using System.Threading.Tasks;
 namespace Prizes.Pages
 {
 
-    public partial class Index : ComponentBase
+    public partial class Index
     {
         [Parameter]
         public string DrawsId { get; set; }
 
-        Candidates candidatesModel = new Candidates();
+        CandidatesModel candidatesModel = new CandidatesModel();
         List<Nationalities> nationalitiesList = new List<Nationalities>();
         [Inject]
         protected NationalitiesService nationalitiesService { get; set; }
         [Inject]
         protected CandidateService userService { get; set; }
+
+        private string selectedCulture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
 
         string spinner = "d-none", maxDate = string.Empty, minDate = string.Empty;
         string message = string.Empty;
@@ -29,6 +32,18 @@ namespace Prizes.Pages
             await GetNationalities();
             maxDate = DateTime.Now.ToString("yyyy-MM-dd");
             minDate = DateTime.Now.AddYears(-100).ToString("yyyy-MM-dd");
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (selectedCulture == "ar-KW")
+            {
+                await JSRuntime.InvokeVoidAsync("setRTLAlignment");
+            }
+            else
+            {
+                await JSRuntime.InvokeVoidAsync("setLTRAlignment");
+            }
         }
 
         protected async Task GetNationalities()
@@ -52,7 +67,7 @@ namespace Prizes.Pages
                 candidates.Name = candidatesModel.Name;
                 candidates.Email = candidatesModel.Email;
                 candidates.PhoneNumber = candidatesModel.PhoneNumber;
-                candidates.DateOfBirth = candidatesModel.DateOfBirth;
+                candidates.DateOfBirth = Convert.ToDateTime(candidatesModel.DateOfBirth);
                 candidates.NationalityId = candidatesModel.NationalityId;
 
                 bool isSuccess = InsertCandidates(candidates, DrawsId);
@@ -78,7 +93,7 @@ namespace Prizes.Pages
         protected bool InsertCandidates(Candidates candidates, string drawsId)
         {
 
-            return  userService.AddCandidates(candidates, drawsId);
+            return userService.AddCandidates(candidates, drawsId);
         }
     }
 }

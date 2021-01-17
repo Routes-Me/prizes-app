@@ -1,0 +1,61 @@
+﻿@inject NavigationManager NavigationManager
+@inject IConfiguration Configuration
+@inject IStringLocalizer<App> Localizer
+
+<style>
+    .language-options {
+        position: relative;
+        top: -40px;
+        float: right;
+        border: 1px solid #e23077;
+        border-radius: 50px;
+        background-color: #e23077;
+    }
+</style>
+
+@if (cultures != null)
+{
+    <form class="form-inline language-options">
+        <select class="form-control mr-2" @onchange="RequestCultureChange">
+            @foreach (var culture in cultures)
+            {
+                @if (selectedCulture == culture.Key)
+                {
+                    <option value="@culture.Key" selected>@culture.Value</option>
+                }
+                else
+                {
+                    <option value="@culture.Key">@culture.Value</option>
+                }
+            }
+        </select>
+    </form>
+    <hiddenfield id="hdnSelectedLanguage"></hiddenfield>
+}
+
+@code {
+    private string selectedCulture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+    private Dictionary<string, string> cultures;
+    public string selectedLanguage = "SelectedLanguage", selectedValue = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        cultures = Configuration.GetSection("Cultures").GetChildren().ToDictionary(x => x.Key, x => x.Value);
+    }
+
+    private async void RequestCultureChange(ChangeEventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(selectedCulture))
+        {
+            return;
+        }
+
+        var uri = new Uri(NavigationManager.Uri)
+        .GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
+
+        var query = $"?culture={Uri.EscapeDataString(e.Value.ToString())}&" +
+            $"redirectUri={Uri.EscapeDataString(uri)}";
+
+        NavigationManager.NavigateTo("/Culture/SetCulture" + query, forceLoad: true);
+    }
+}
