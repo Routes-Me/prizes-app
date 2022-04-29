@@ -23,15 +23,15 @@ namespace Prizes.Models
     {
         [Required(ErrorMessage = "Name required")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "Email required")]
+        // [Required(ErrorMessage = "Email required")]
         [EmailAddress(ErrorMessage ="Valid email address required")]
         public string Email { get; set; }
-        [Required(ErrorMessage = "DateOfBirth required")]
+        // [Required(ErrorMessage = "DateOfBirth required")]
         public string DateOfBirth { get; set; }
         [Required(ErrorMessage = "PhoneNumber required")]
         [Phone(ErrorMessage = "Valid phone number required")]
         public string PhoneNumber { get; set; }
-        [Required(ErrorMessage = "Nationality required")]
+        // [Required(ErrorMessage = "Nationality required")]
         public string NationalityId { get; set; }
     }
 }
