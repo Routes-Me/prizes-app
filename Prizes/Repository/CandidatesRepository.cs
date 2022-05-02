@@ -25,7 +25,10 @@ namespace Prizes.Repository
         {
             try
             {
-                var client = new RestClient(_appSettings.Host + _dependencies.PostCandidates.Replace("|id|", drawsId));
+                var paramstr = _dependencies.PostCandidates.Replace("|id|", drawsId);
+                var urlString = _appSettings.Host + paramstr;
+                Console.WriteLine("url addCandidate : "+urlString);
+                var client = new RestClient(urlString);
                 var request = new RestRequest(Method.POST);
                 string jsonToSend = JsonConvert.SerializeObject(candidates);
                 request.AddParameter("application/json; charset=utf-8", jsonToSend, ParameterType.RequestBody);
