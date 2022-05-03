@@ -29,7 +29,7 @@ namespace Prizes.Pages
         AlertMessageType messageType = AlertMessageType.Success;
         protected override async Task OnInitializedAsync()
         {
-            await GetNationalities();
+            // await GetNationalities();
             maxDate = DateTime.Now.ToString("yyyy-MM-dd");
             minDate = DateTime.Now.AddYears(-100).ToString("yyyy-MM-dd");
         }
@@ -77,7 +77,7 @@ namespace Prizes.Pages
                 }
                 else
                 {
-                    message = "Something went wrong!! Please try again.";
+                    message = "Registration failed went wrong!! Please try again.";
                     messageType = AlertMessageType.Error;
                 }
             }
